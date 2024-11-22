@@ -22,6 +22,7 @@
         81    # NPM Admin Portal
         443   # HTTPS (NPM)
         3000  # AdGuard Home Admin
+        3150  # Homepage Dashboard
         3306  # MariaDB
         8000  # Test HTTP Server
         9000  # Portainer
@@ -62,6 +63,19 @@
           autoStart = true;
         };
         
+        homepage = {
+          image = "ghcr.io/gethomepage/homepage:latest";
+          ports = [ "3150:3000" ];
+          environment = {
+            PUID = "1000";
+            PGID = "1000";
+          };
+          volumes = [
+            "/var/lib/homepage/config:/app/config"
+            "/var/run/docker.sock:/var/run/docker.sock:ro"
+          ];
+          autoStart = true;
+        };
       };
     };
   };
@@ -107,7 +121,9 @@
     "d /var/lib/npm/data 0750 admin docker -"
     "d /var/lib/npm/mysql 0750 admin docker -"
     "d /var/lib/npm/letsencrypt 0750 admin docker -"
-    "d /var/www/test 0755 admin admin -"
+    "d /var/lib/www/test 0755 admin admin -"
+    "d /var/lib/homepage 0755 admin docker -"
+    "d /var/lib/homepage/config 0755 admin docker -"
   ];
 
   # User Configuration
