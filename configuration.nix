@@ -101,7 +101,12 @@
         ];
         local_domain_name = "home";
         resolve_clients = true;
-        rewrites = [];
+        rewrites = [
+        {
+          domain = "my.home";
+          answer = "100.113.131.93";
+        }
+      ];
       };
       http = {
         username = "admin";
