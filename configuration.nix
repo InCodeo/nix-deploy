@@ -69,6 +69,7 @@
           environment = {
             PUID = "1000";
             PGID = "1000";
+            DEBUG = "true";
           };
           volumes = [
             "/var/lib/homepage/config:/app/config"
