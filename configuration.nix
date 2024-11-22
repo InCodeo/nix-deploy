@@ -22,7 +22,7 @@
         81    # NPM Admin Portal
         443   # HTTPS (NPM)
         3000  # AdGuard Home Admin
-        3150  # Homepage Dashboard
+        3150  # Homepage Dashboard (direct access)
         3306  # MariaDB
         8000  # Test HTTP Server
         9000  # Portainer
@@ -45,7 +45,6 @@
         enable = true;
         dates = "weekly";
       };
-      
     };
     oci-containers = {
       backend = "docker";
@@ -60,6 +59,9 @@
             TZ = "Australia/Sydney";
           };
           ports = ["9000:9000"];
+          extraOptions = [
+            "--network=proxy-network"
+          ];
           autoStart = true;
         };
         
@@ -74,6 +76,30 @@
           volumes = [
             "/var/lib/homepage/config:/app/config"
             "/var/run/docker.sock:/var/run/docker.sock:ro"
+          ];
+          extraOptions = [
+            "--network=proxy-network"
+          ];
+          autoStart = true;
+        };
+
+        npm = {
+          image = "jc21/nginx-proxy-manager:latest";
+          ports = [
+            "80:80"
+            "81:81"
+            "443:443"
+          ];
+          environment = {
+            DISABLE_IPV6 = "true";
+            TZ = "Australia/Sydney";
+          };
+          volumes = [
+            "/var/lib/npm/data:/data"
+            "/var/lib/npm/letsencrypt:/etc/letsencrypt"
+          ];
+          extraOptions = [
+            "--network=proxy-network"
           ];
           autoStart = true;
         };
@@ -103,11 +129,11 @@
         local_domain_name = "home";
         resolve_clients = true;
         rewrites = [
-        {
-          domain = "my.home";
-          answer = "100.113.131.93";
-        }
-      ];
+          {
+            domain = "my.home";
+            answer = "100.113.131.93";
+          }
+        ];
       };
       http = {
         username = "admin";
@@ -117,6 +143,25 @@
       user_rules = [];
       schema_version = 12;
     };
+  };
+
+  # Create Docker network and directories
+  systemd.services.docker-network-setup = {
+    description = "Create Docker network and set up directories";
+    path = [ pkgs.docker ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+    script = ''
+      # Create the network if it doesn't exist
+      if ! docker network inspect proxy-network >/dev/null 2>&1; then
+        docker network create proxy-network
+      fi
+    '';
+    wantedBy = [ "multi-user.target" ];
+    requires = [ "docker.service" ];
+    after = [ "docker.service" ];
   };
 
   # Directory Structure
