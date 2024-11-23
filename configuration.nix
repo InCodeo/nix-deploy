@@ -133,6 +133,14 @@
             domain = "my.home";
             answer = "100.113.131.93";
           }
+          {
+            domain = "npm.home";
+            answer = "100.113.131.93";
+          }
+          {
+            domain = "adguard.home";
+            answer = "100.113.131.93";
+          }
         ];
       };
       http = {
