@@ -69,8 +69,8 @@
           image = "ghcr.io/gethomepage/homepage:latest";
           ports = [ "3150:3000" ];
           environment = {
-            PUID = "1000";
-            PGID = "1000";
+            PUID = "1001";
+            PGID = "131";
             DEBUG = "true";
           };
           volumes = [
