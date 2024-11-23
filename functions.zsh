@@ -11,6 +11,7 @@ function nixup() {
     echo "🔄 Updating NixOS configuration..."
     if _nix_update_git "/etc/nixos"; then
         echo "🔨 Rebuilding NixOS..."
+        cp -r /etc/nixos/homepage/* /var/lib/homepage/config/
         sudo nixos-rebuild switch || { echo "❌ Build failed"; return 1; }
         echo "✅ Done"
     else
