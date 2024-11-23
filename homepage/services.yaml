@@ -4,4 +4,18 @@
   items:
     - name: Portainer
       icon: simple-icons:portainer
-      href: http://localhost:9000 W
+      href: http://portainer.home
+      description: Container Management
+      status: http://portainer.home
+      
+    - name: Nginx Proxy Manager
+      icon: simple-icons:nginx
+      href: http://npm.home:81
+      description: Reverse Proxy Management
+      status: http://npm.home:81
+      
+    - name: AdGuard Home
+      icon: simple-icons:adguard
+      href: http://adguard.home:3000
+      description: DNS Ad Blocking
+      status: http://adguard.home:3000
