@@ -1,25 +1,24 @@
----
+services:
+  - name: Infrastructure
+    icon: fas fa-server
+    items:
+      - name: Portainer
+        icon: simple-icons:portainer
+        href: http://portainer.home
+        description: Container Management
+        status: http://portainer.home
+      
+      - name: Nginx Proxy Manager
+        icon: simple-icons:nginx
+        href: http://npm.home:81
+        description: Reverse Proxy Management
+        status: http://npm.home:81
 
-- name: Infrastructure
-  icon: fas fa-server
-  items:
-    - name: Portainer
-      icon: simple-icons:portainer
-      href: http://portainer.home
-      description: Container Management
-      status: http://portainer.home
-    
-    - name: Nginx Proxy Manager
-      icon: simple-icons:nginx
-      href: http://npm.home:81
-      description: Reverse Proxy Management
-      status: http://npm.home:81
-
-- name: Network
-  icon: fas fa-network-wired
-  items:
-    - name: AdGuard Home
-      icon: simple-icons:adguard
-      href: http://adguard.home:3000
-      description: DNS Ad Blocking & Management
-      status: http://adguard.home:3000
+  - name: Network
+    icon: fas fa-network-wired
+    items:
+      - name: AdGuard Home
+        icon: simple-icons:adguard
+        href: http://adguard.home:3000
+        description: DNS Ad Blocking & Management
+        status: http://adguard.home:3000
