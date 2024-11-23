@@ -1,6 +1,4 @@
 ---
-# File: homepage/services.yaml
-# Purpose: Define services with status monitoring
 
 - name: Infrastructure
   icon: fas fa-server
