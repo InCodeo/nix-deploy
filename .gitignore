@@ -83,8 +83,7 @@ yarn.lock
 # Folders
 *build*
 *venv*
-*pyc*
-*test*
+
 
 
 # Random ones I can think of that could go either way
@@ -130,7 +129,7 @@ LICENSE*
 test/
 
 spec/
-__tests__/
+
 
 # Editor and IDE files
 .vscode/
@@ -223,12 +222,11 @@ Thumbs.db
 # TypeScript declaration files
 *.d.ts
 
-# Test directories and files
-**/test/
-**/tests/
+
+
 **/spec/
-**/__tests__/
-*.test.js
+
+
 *.spec.js
 
 # Linter and formatter configs (keep only if crucial)
