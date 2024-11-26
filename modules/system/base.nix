@@ -12,7 +12,10 @@
     useDHCP = true;
     firewall = {
       enable = true;
-      # No ports opened by default - services should declare their own
+      # Allow Tailscale
+      allowedUDPPorts = [ config.services.tailscale.port ];
+      # Required for Tailscale to work properly
+      trustedInterfaces = [ "tailscale0" ];
     };
   };
 
@@ -29,7 +32,8 @@
     # Networking tools
     inetutils
     netcat
-    dig
+    bind # for dig
+    tailscale
     
     # Docker requirements
     docker-compose
@@ -39,15 +43,20 @@
     ctop   # Container monitoring
   ];
 
-  # Basic system services
+  # SSH Configuration
   services.openssh = {
     enable = true;
     settings = {
-      PasswordAuthentication = true;  # For testing only
+      PasswordAuthentication = true;  # Consider disabling after initial setup
       PermitRootLogin = "prohibit-password";
       X11Forwarding = false;
+      PermitEmptyPasswords = false;
+      MaxAuthTries = 3;
     };
   };
+
+  # Enable Tailscale
+  services.tailscale.enable = true;
 
   # Resource monitoring service
   systemd.services.resource-monitor = {
