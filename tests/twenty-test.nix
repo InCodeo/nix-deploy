@@ -1,5 +1,3 @@
-# tests/twenty-test.nix
-
 { config, pkgs, ... }:
 
 let
@@ -10,16 +8,17 @@ in
     ../modules/docker/twenty.nix
   ];
 
-  networking.hostName = "twenty-test";
-
+  # Only Twenty-specific configuration
   services.twenty = {
     enable = true;
     port = 3333;
     postgresql.password = postgresPassword;
   };
 
+  # Required networking configuration
   networking.firewall.allowedTCPPorts = [ 22 3333 ];
 
+  # Test helper functions
   programs.zsh.shellInit = ''
     twenty-test() {
       echo "Testing Twenty installation..."
@@ -67,6 +66,4 @@ in
       echo "Reset complete. Run twenty-test to verify."
     }
   '';
-
-  system.stateVersion = "24.05";
 }
