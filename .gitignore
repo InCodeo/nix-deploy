@@ -128,7 +128,7 @@ LICENSE*
 
 # Test files
 test/
-tests/
+
 spec/
 __tests__/
 
