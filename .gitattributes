@@ -1,0 +1,6 @@
+
+echo "* text=auto
+*.yaml text eol=lf
+*.yml text eol=lf
+*.zsh text eol=lf
+*.nix text eol=lf" | sudo tee /etc/nixos/.gitattributes

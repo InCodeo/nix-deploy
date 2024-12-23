@@ -1,17 +1,23 @@
 - Infrastructure:
     - Portainer:
-        icon: simple-icons:portainer
+        icon: mdi:docker
         href: http://portainer.home
         description: Container Management
         status: http://portainer.home
     - Nginx Proxy Manager:
-        icon: simple-icons:nginx
+        icon: mdi:nginx
         href: http://npm.home:81
         description: Reverse Proxy Management
         status: http://npm.home:81
 - Network:
     - AdGuard Home:
-        icon: simple-icons:adguard
+        icon: mdi:shield-check
         href: http://adguard.home:3000
         description: DNS Ad Blocking & Management
         status: http://adguard.home:3000
+- Search:
+    - Meilisearch:
+        icon: mdi:magnify
+        href: http://localhost:7700
+        description: Search Engine
+        status: http://localhost:7700
