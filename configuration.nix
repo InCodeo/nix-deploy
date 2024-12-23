@@ -228,6 +228,7 @@
 
     # Added for test server
     python3
+    dos2unix
   ];
 
   # Enable Tailscale
